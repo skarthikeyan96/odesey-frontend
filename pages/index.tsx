@@ -10,7 +10,9 @@ export default function Home() {
       </Head>
 
       <main>
-        Odesey Front end
+      <h1 className="text-3xl font-sans font-bold underline">
+      Odesey Front end
+    </h1>
       </main>
 
      
