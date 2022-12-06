@@ -1,5 +1,6 @@
-import Head from 'next/head'
-
+import Head from "next/head";
+import FormComponent from "../components/Form";
+import Navbar from "../components/Navbar";
 export default function Home() {
   return (
     <div>
@@ -9,13 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-      <h1 className="text-3xl font-sans ">
-      Odesey Front end
-    </h1>
-      </main>
-
-     
+        <Navbar/>
+          
+        
     </div>
-  )
+  );
 }
