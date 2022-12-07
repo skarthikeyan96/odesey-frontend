@@ -1,5 +1,5 @@
 import Head from "next/head";
-import FormComponent from "../components/Form";
+import FormComponent from "../components/RegisterForm";
 import Navbar from "../components/Navbar";
 export default function Home() {
   return (
@@ -10,7 +10,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <Navbar/>
           
         
     </div>

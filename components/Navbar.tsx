@@ -11,7 +11,7 @@ const Navbar = () => {
     if (currentTheme === "dark") {
       return (
         <button
-          className="border rounded-sm p-2"
+          className="rounded-sm p-2"
           onClick={() => setTheme("light")}
           type="button"
         >
@@ -22,7 +22,7 @@ const Navbar = () => {
     }
     return (
       <button
-        className="border rounded-sm p-2"
+        className=" rounded-sm p-2"
         onClick={() => setTheme("dark")}
         type="button"
       >
@@ -32,7 +32,7 @@ const Navbar = () => {
     );
   };
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5  text-black shadow-sm dark:bg-slate-800 dark:text-white">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2  text-black shadow-sm dark:bg-slate-800 dark:text-white">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <Link href="/" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap ">
