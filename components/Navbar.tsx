@@ -21,7 +21,13 @@ const Navbar = (props: any) => {
         </li>
 
         <li>
-          <NavLink name="Register" route="register" />
+        <Link
+                      className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3"
+                      href="/register"
+                    >
+                      <span>Register</span>
+                     
+                    </Link>
         </li>
       </>
     );
