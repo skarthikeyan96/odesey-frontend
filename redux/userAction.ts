@@ -10,8 +10,6 @@ export const registerUser: any = createAsyncThunk(
   async (data: any, { rejectWithValue }) => {
     const { email, password, userName } = data;
 
-    
-    console.log(`${process.env.NEXT_PUBLIC_URL_PREFIX}`);
     try {
       // configure header's Content-Type as JSON
       const config = {
@@ -58,11 +56,9 @@ export const userLogin:any = createAsyncThunk(
           config
         )
         
-    // get the user details if everything goes well
-        console.log(data)
+      // get the user details if everything goes well
 
         const response = await axios.get('/api/user')
-        console.log(response)
         // store user's token in local storage
         return data
 

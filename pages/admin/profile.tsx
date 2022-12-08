@@ -16,14 +16,7 @@ const Profile = (properties: { user: { email: any; username: any }, isAuthentica
 
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   const { user } = properties;
-  //   dispatch(login({ ...user }));
-  //   return () => {};
-  // }, []);
-
   const handleDelete = () => {
-    console.log("delete API action");
     axios.delete('/api/user', {data: {username: username}})
   };
 

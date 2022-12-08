@@ -1,10 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
-import Button from "./Button";
-import axios from "axios";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-// import { login } from "../redux/user.slice";
 import * as yup from "yup";
 import { userLogin } from "../redux/userAction";
 import { renderErrorDataFromAPI } from "./RegisterForm";
@@ -82,7 +79,6 @@ const LoginFormComponent = () => {
       >
         {(formik: any) => {
           const { errors, touched, isValid, dirty } = formik;
-          console.log(errors)
           return (
             <Form className="pt-4">
               <div className="mb-6">

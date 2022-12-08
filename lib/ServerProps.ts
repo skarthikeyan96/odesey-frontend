@@ -30,7 +30,8 @@ export default async function getServerSideProps(ctx: any) {
     return {
       props: {
         user,
-        isAuthenticated: true
+        isAuthenticated: true,
+        jwt: cookies.jwt
       },
     };
   }

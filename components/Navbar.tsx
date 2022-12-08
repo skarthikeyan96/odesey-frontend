@@ -1,52 +1,17 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React from "react";
 import { useRouter } from "next/router";
 import NavLink from "./NavLink";
 import axios from "axios";
 import { logout } from "../redux/user.slice";
 
-const Navbar = (props:any) => {
-  const { systemTheme, theme, setTheme } = useTheme();
+const Navbar = (props: any) => {
 
-  const { isAuthenticated } = props
+  const { isAuthenticated } = props;
   const router = useRouter();
   const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //   // check if authenticated
-  //   if (isAuthenticated) {
-  //     router.push("/dashboard");
-  //   }else{
-  //     router.push("/login")
-  //   }
-  // }, []);
-
-  const renderThemeToggle = () => {
-    const currentTheme = theme === "system" ? systemTheme : theme;
-    if (currentTheme === "dark") {
-      return (
-        <button
-          className="rounded-sm p-2"
-          onClick={() => setTheme("light")}
-          type="button"
-        >
-          <MoonIcon className="h-6 w-6 " />
-        </button>
-      );
-    }
-    return (
-      <button
-        className=" rounded-sm p-2"
-        onClick={() => setTheme("dark")}
-        type="button"
-      >
-        <SunIcon className="h-6 w-6 " />
-      </button>
-    );
-  };
 
   const renderAuthButtons = () => {
     return (
@@ -79,6 +44,10 @@ const Navbar = (props:any) => {
 
     return (
       <>
+       <li>
+          <NavLink name="New Journal" route="admin/journal/new" />
+        </li>
+
         <li>
           <NavLink name="Profile" route="admin/profile" />
         </li>

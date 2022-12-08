@@ -16,8 +16,6 @@ export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const jwt: any = req.cookies.get("jwt");
 
-  console.log("middle ware kicks in");
-
   if (
     pathname.startsWith("/_next") || // exclude Next.js internals
     pathname.startsWith("/api") || //  exclude all API routes
@@ -28,18 +26,15 @@ export default async function middleware(req: NextRequest) {
 
 if ((/\/admin\/.*/gim).test(pathname)) {
     // anything present under the admin route is private
-    console.log(jwt)
     if (jwt === undefined) {
       req.nextUrl.pathname = "/login";
       return NextResponse.redirect(req.nextUrl);
     }
 
     try {
-      const payload = await verify(jwt.value, JWT_KEY );
-      console.log("payload", payload)
+       await verify(jwt.value, JWT_KEY );
       return NextResponse.next();
     } catch (error) {
-      console.log("Error", error)
       req.nextUrl.pathname = "/login";
       return NextResponse.redirect(req.nextUrl);
     }
