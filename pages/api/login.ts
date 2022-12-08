@@ -11,7 +11,7 @@ const handler = async (request: NextApiRequest, res: NextApiResponse) => {
     formData.append("password", password);
 
     const response = await axios.post(
-      `${process.env.URL_PREFIX}/auth/login`,
+      `${process.env.NEXT_PUBLIC_URL_PREFIX}/auth/login`,
       formData
     );
 
@@ -20,11 +20,13 @@ const handler = async (request: NextApiRequest, res: NextApiResponse) => {
       secure: process.env.NODE_ENV !== "development",
       maxAge: 30 * 24 * 60 * 60,
       path: "/",
+      sameSite: "lax"
     });
 
-    res.status(200).send({ data: "success" });
+    res.status(200).send({ data: "success", meta: response.data });
   } catch (error: any) {
-    res.status(400).send(error);
+    console.log(error)
+    res.status(401).send(error.response.data || "Something went wrong ...");
   }
 };
 

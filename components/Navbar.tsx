@@ -67,7 +67,7 @@ const Navbar = () => {
     try {
       await axios.get("/api/logout");
 
-      dispatch(logout({}));
+      dispatch(logout());
 
       router.push("/login");
     } catch (e) {

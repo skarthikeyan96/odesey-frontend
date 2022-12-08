@@ -1,26 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { registerUser, userLogin } from "./userAction";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
     isAuthenticated: false,
-    user: {},
+    user: null,
+    token: "",
+    loading: false,
+    error: null,
+  success: false,
     
   },
   reducers: {
-    logout: (state, action) => {
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: action.payload
-      };
+    logout: (state) => {
+      state.loading = false
+      state.user = null
+      state.token = ""
+      state.error = null
+      state.isAuthenticated = false
     },
-    login: (state, action) => {
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload
-      };
+  },
+  extraReducers: {
+    // register user
+    [registerUser.pending]: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    [registerUser.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.success = true // registration successful
+      // state.isAuthenticated = true
+    },
+    [registerUser.rejected]: (state, { payload }) => {
+      
+      state.loading = false
+      state.error = payload
+    },
+
+    // login user
+    [userLogin.pending]: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    [userLogin.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.token = payload.meta.access_token
+      state.isAuthenticated = true
+    },
+    [userLogin.rejected]: (state, { payload }) => {
+      state.loading = false
+      state.error = payload
     },
   },
 });
@@ -28,6 +58,5 @@ const userSlice = createSlice({
 export const UserReducer = userSlice.reducer;
 
 export const {
- login,
  logout
 } = userSlice.actions;
