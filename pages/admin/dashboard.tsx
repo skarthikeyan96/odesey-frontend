@@ -1,6 +1,6 @@
 import Head from "next/head";
-import FormComponent from "../components/RegisterForm";
-import Navbar from "../components/Navbar";
+import FormComponent from "../../components/RegisterForm";
+import Navbar from "../../components/Navbar";
 import axios from "axios";
 import nookies  from 'nookies';
 

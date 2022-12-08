@@ -3,8 +3,8 @@ import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { login, logout } from "../redux/user.slice";
-import Button from "../components/Button";
+import { login, logout } from "../../redux/user.slice";
+import Button from "../../components/Button";
 
 const Profile = (properties: { user: { email: any; username: any } }) => {
   const router = useRouter();
@@ -65,7 +65,6 @@ export const getServerSideProps = async (context: any) => {
     user = data;
   }
 
-  console.log(user);
   if (!user) {
     return {
       redirect: {

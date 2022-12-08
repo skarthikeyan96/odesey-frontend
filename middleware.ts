@@ -1,0 +1,49 @@
+import { jwtVerify } from "jose";
+import { NextRequest, NextResponse } from "next/server";
+
+const JWT_KEY = process.env.JWT_KEY as string;
+
+export async function verify(token: string, secret: string): Promise<any> {
+  const {payload} = await jwtVerify(token, new TextEncoder().encode(secret));
+  // run some checks on the returned payload, perhaps you expect some specific values
+
+  // if its all good, return it, or perhaps just return a boolean
+  return payload;
+}
+
+export default async function middleware(req: NextRequest) {
+  const url = req.url;
+  const { pathname } = req.nextUrl;
+  const jwt: any = req.cookies.get("jwt");
+
+  console.log("middle ware kicks in");
+
+  if (
+    pathname.startsWith("/_next") || // exclude Next.js internals
+    pathname.startsWith("/api") || //  exclude all API routes
+    pathname.startsWith("/static") || // exclude static files
+    pathname.includes(".") // exclude all files in the public folder
+  )
+    return NextResponse.next();
+
+if ((/\/admin\/.*/gim).test(pathname)) {
+    // anything present under the admin route is private
+    console.log(jwt)
+    if (jwt === undefined) {
+      req.nextUrl.pathname = "/login";
+      return NextResponse.redirect(req.nextUrl);
+    }
+
+    try {
+      const payload = await verify(jwt.value, JWT_KEY );
+      console.log("payload", payload)
+      return NextResponse.next();
+    } catch (error) {
+      console.log("Error", error)
+      req.nextUrl.pathname = "/login";
+      return NextResponse.redirect(req.nextUrl);
+    }
+  }
+
+  return NextResponse.next();
+}

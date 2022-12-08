@@ -6,7 +6,6 @@ const handler = async (request: NextApiRequest, res: NextApiResponse) => {
   const { password, email } = request.body;
 
   try {
-    console.log(email, password);
     const formData = new URLSearchParams();
     formData.append("username", email);
     formData.append("password", password);
@@ -25,7 +24,6 @@ const handler = async (request: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).send({ data: "success" });
   } catch (error: any) {
-    console.log(error);
     res.status(400).send(error);
   }
 };

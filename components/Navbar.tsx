@@ -69,7 +69,7 @@ const Navbar = () => {
 
       dispatch(logout({}));
 
-      router.push("/login", undefined, { shallow: true });
+      router.push("/login");
     } catch (e) {
       console.error(e);
     }
@@ -81,7 +81,7 @@ const Navbar = () => {
     return (
       <>
         <li>
-          <NavLink name="Profile" route="profile" />
+          <NavLink name="Profile" route="admin/profile" />
         </li>
         <li>
           <button
@@ -99,7 +99,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2  text-black shadow-sm dark:bg-slate-800 dark:text-white">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <Link href="/" className="flex items-center">
+        <Link href="/admin/dashboard" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap ">
             Odesey
           </span>
@@ -109,7 +109,6 @@ const Navbar = () => {
           <ul className="flex flex-col p-4 mt-4 border dark:text-white dark:bg-slate-800  border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
             {!isAuthenticated && renderAuthButtons()}
 
-            {isAuthenticated && <li>{renderThemeToggle()}</li>}
             {isAuthenticated && renderAppButtons()}
           </ul>
         </div>
