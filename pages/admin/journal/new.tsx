@@ -7,10 +7,8 @@ import toast, { Toaster } from "react-hot-toast";
 
 export { default as getServerSideProps } from "../../../lib/ServerProps";
 
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 
 const NewJournal = (props: any) => {
   const [title, setTitle] = useState("");
@@ -96,7 +94,7 @@ const NewJournal = (props: any) => {
           >
             Description
           </label>
-          <QuillNoSSRWrapper
+          <ReactQuill
             // modules={modules}
             onChange={setContent}
             theme="snow"
