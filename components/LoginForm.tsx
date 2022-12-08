@@ -49,7 +49,9 @@ const LoginFormComponent = () => {
 
     //@ts-ignore
     await dispatch(userLogin(values))
-    router.push("/admin/dashboard");
+
+    router.push("/admin/dashboard")
+    
 
 
   };
@@ -129,7 +131,8 @@ const LoginFormComponent = () => {
                   className="bg-slate-800  text-white tracking-normal text-lg font-sans  py-2 px-4 rounded w-full"
                   disabled={Object.keys(errors).length !== 0}
                 >
-                  {loading ? (
+                   <> Sign in</>
+                  {/* {loading ? (
                     <div className="flex items-center text-center justify-center">
                       <svg
                         className="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
@@ -143,7 +146,7 @@ const LoginFormComponent = () => {
                           cy="12"
                           r="10"
                           stroke="currentColor"
-                          stroke-width="4"
+                          strokeWidth="4"
                         ></circle>
                         <path
                           className="opacity-75"
@@ -155,7 +158,7 @@ const LoginFormComponent = () => {
                     </div>
                   ) : (
                     <> Sign in</>
-                  )}
+                  )} */}
                 </button>
             </Form>
           );
