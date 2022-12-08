@@ -3,14 +3,17 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import Button from "./Button";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/user.slice";
 
 interface Values {
   email: string;
   password: string;
 }
 
-const RegisterFormComponent = () => {
+const LoginFormComponent = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (
     values: Values,
@@ -18,16 +21,16 @@ const RegisterFormComponent = () => {
   ) => {
     console.log(values);
     try {
-      const formData = new FormData();
-      formData.append("username", values.email);
-      formData.append("password", values.password);
+      const response = await axios.post("/api/login", {
+        email: values.email,
+        password: values.password,
+      });
 
-      const res = await axios.post(
-        "http://localhost:8080/auth/login",
-        formData
-      );
-
-      console.log(res);
+      if (response.status === 200) {
+        dispatch(login({}));
+        router.push("/dashboard");
+      }
+      console.log(response);
     } catch (e) {
       console.log(e);
     }
@@ -82,4 +85,4 @@ const RegisterFormComponent = () => {
   );
 };
 
-export default RegisterFormComponent;
+export default LoginFormComponent;
