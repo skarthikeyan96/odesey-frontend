@@ -4,7 +4,13 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import nookies  from 'nookies';
 
-export default function Home() {
+export { default as getServerSideProps } from "../../lib/ServerProps"
+
+
+export default function Home(props: any) {
+
+  const {user: {username}} = props;
+
   return (
     <div>
       <Head>
@@ -13,32 +19,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-          <p> Sensitive infor</p>
+
+      <Navbar isAuthenticated={props.isAuthenticated}/>
+
+        <div className="p-4 ml-4">
+
+        <h2> Welcome {username} </h2>
+        </div>
         
     </div>
   );
 }
 
-// export const getServerSideProps = async (context: any) => {
-//     const cookies = nookies.get(context);
-//     let validToken;
-  
-//     if (cookies?.jwt) {
-      
-//     }
-  
-//     if (!validToken) {
-//       return {
-//         redirect: {
-//           permanent: false,
-//           destination: "/",
-//         },
-//       };
-//     }
-  
-//     return {
-//       props: {
-        
-//       },
-//     };
-//   };
+

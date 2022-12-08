@@ -8,11 +8,10 @@ import NavLink from "./NavLink";
 import axios from "axios";
 import { logout } from "../redux/user.slice";
 
-const Navbar = () => {
+const Navbar = (props:any) => {
   const { systemTheme, theme, setTheme } = useTheme();
 
-  const { isAuthenticated } = useSelector((state: any) => state.user);
-
+  const { isAuthenticated } = props
   const router = useRouter();
   const dispatch = useDispatch();
 
