@@ -6,7 +6,7 @@ import Navbar from "../../../components/Navbar";
 import { Sanitized } from "../dashboard";
 export { default as getServerSideProps } from "../../../lib/ServerProps";
 
-const viewJournal = (props: { isAuthenticated: any; jwt: any }) => {
+const ViewJournal = (props: { isAuthenticated: any; jwt: any }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -77,4 +77,4 @@ const viewJournal = (props: { isAuthenticated: any; jwt: any }) => {
   );
 };
 
-export default viewJournal;
+export default ViewJournal;
