@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { userLogin } from "../redux/userAction";
 import { renderErrorDataFromAPI } from "./RegisterForm";
+import Router from "next/router";
 interface Values {
   email: string;
   password: string;
@@ -49,7 +50,7 @@ const LoginFormComponent = () => {
 
     //@ts-ignore
     await dispatch(userLogin(values))
-    router.push("/admin/dashboard");
+    Router.push("/admin/dashboard");
 
 
   };
