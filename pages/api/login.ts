@@ -23,7 +23,7 @@ const handler = async (request: NextApiRequest, res: NextApiResponse) => {
       sameSite: "lax"
     });
 
-    res.status(200).send({ data: "success", meta: response.data });
+    res.status(200).send({ message: "success" });
   } catch (error: any) {
     console.log(error)
     res.status(401).send(error.response.data || "Something went wrong ...");

@@ -1,11 +1,12 @@
 import React from "react";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { userLogin } from "../redux/userAction";
 import { renderErrorDataFromAPI } from "./RegisterForm";
-import Router from "next/router";
 interface Values {
   email: string;
   password: string;
@@ -38,10 +39,13 @@ function validateEmail(value:string) {
 
 
 const LoginFormComponent = () => {
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
 
-  const { loading, error, success } = useSelector((state: any) => state.user);
+  // E.g. `/dashboard?page=2&order=asc`
+  const register = searchParams.get('register');
+  const { loading, error, isAuthenticated } = useSelector((state: any) => state.user);
 
   const handleSubmit = async (
     values: Values,
@@ -49,16 +53,14 @@ const LoginFormComponent = () => {
   ) => {
 
     //@ts-ignore
-    await dispatch(userLogin(values))
-    Router.push("/admin/dashboard");
-
+   await dispatch(userLogin(values));
+   router.push("/admin/dashboard?login=sucess")
 
   };
-
   return (
     <>
      {renderErrorDataFromAPI(error)}
-      {router.query.register && (
+      {register && (
         <>
           <div
             className="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"

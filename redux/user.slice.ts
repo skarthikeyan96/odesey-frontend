@@ -46,7 +46,7 @@ const userSlice = createSlice({
     [userLogin.fulfilled]: (state, { payload }) => {
       localStorage.setItem("isAuthenticated", "true")
       state.loading = false
-      state.token = payload.meta.access_token
+      state.success = payload
       state.isAuthenticated = true
     },
     [userLogin.rejected]: (state, { payload }) => {

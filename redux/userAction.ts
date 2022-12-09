@@ -50,17 +50,13 @@ export const userLogin:any = createAsyncThunk(
         }
 
         // Proxy that will talk to FastAPI server
-        const { data } = await axios.post(
+        const {data} = await axios.post(
           '/api/login',
           { email, password },
           config
         )
-        
-      // get the user details if everything goes well
 
-        const response = await axios.get('/api/user')
-        // store user's token in local storage
-        return data
+          return data.message
 
 
       } catch (error:any) {
